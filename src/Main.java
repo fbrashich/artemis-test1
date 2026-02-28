@@ -57,8 +57,8 @@ public class Main {
         graph.addEdge("d13", "d2", 200);
 
         // Prueba 1: Camino más corto desde d8 hasta d6
-        String origen = "d8";
-        String destino = "d6";
+        String origen = "d1";
+        String destino = "d10";
         System.out.println("Calculando el camino más corto desde " + origen + " hasta " + destino + ":");
         graph.computePaths(origen);
 
