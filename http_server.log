@@ -1,0 +1,6 @@
+127.0.0.1 - - [01/Mar/2026 01:33:32] "GET /tateti/index.html HTTP/1.1" 200 -
+127.0.0.1 - - [01/Mar/2026 01:33:32] "GET /tateti/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [01/Mar/2026 01:33:32] "GET /tateti/script.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Mar/2026 01:34:31] "GET /tateti/index.html HTTP/1.1" 200 -
+127.0.0.1 - - [01/Mar/2026 01:34:31] "GET /tateti/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [01/Mar/2026 01:34:31] "GET /tateti/script.js HTTP/1.1" 200 -
