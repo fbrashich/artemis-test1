@@ -62,28 +62,97 @@ function handleCellClick(clickedCellEvent) {
 }
 
 /**
- * Lógica del bot para realizar una jugada.
+ * Evalúa el tablero usando el algoritmo minimax para encontrar la mejor jugada.
+ * @param {Array<string>} board Estado actual del tablero.
+ * @param {number} depth Profundidad actual del árbol de búsqueda.
+ * @param {boolean} isMaximizing Si es el turno del bot (maximizador) o del jugador (minimizador).
+ * @returns {number} El puntaje de la jugada.
+ */
+function minimax(board, depth, isMaximizing) {
+    // Comprobar estado terminal
+    let result = checkWin(board);
+    if (result === 'O') return 10 - depth;
+    if (result === 'X') return depth - 10;
+
+    let isDraw = true;
+    for (let i = 0; i < board.length; i++) {
+        if (board[i] === '') {
+            isDraw = false;
+            break;
+        }
+    }
+    if (isDraw) return 0;
+
+    if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === '') {
+                board[i] = 'O';
+                let score = minimax(board, depth + 1, false);
+                board[i] = '';
+                bestScore = Math.max(score, bestScore);
+            }
+        }
+        return bestScore;
+    } else {
+        let bestScore = Infinity;
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === '') {
+                board[i] = 'X';
+                let score = minimax(board, depth + 1, true);
+                board[i] = '';
+                bestScore = Math.min(score, bestScore);
+            }
+        }
+        return bestScore;
+    }
+}
+
+/**
+ * Función auxiliar para verificar si hay un ganador en el algoritmo minimax.
+ * @param {Array<string>} board Estado del tablero a verificar.
+ * @returns {string|null} El jugador ganador ('X' o 'O') o null si no hay.
+ */
+function checkWin(board) {
+    for (let i = 0; i < winningConditions.length; i++) {
+        const [a, b, c] = winningConditions[i];
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            return board[a];
+        }
+    }
+    return null;
+}
+
+/**
+ * Lógica del bot para realizar una jugada inteligente usando minimax.
  */
 function makeBotMove() {
     if (!gameActive) return;
 
-    // Encuentra celdas vacías
-    let emptyCells = [];
+    let bestScore = -Infinity;
+    let move = -1;
+
     for (let i = 0; i < gameState.length; i++) {
         if (gameState[i] === '') {
-            emptyCells.push(i);
+            // Intentar la jugada
+            gameState[i] = 'O';
+            let score = minimax(gameState, 0, false);
+            // Deshacer la jugada
+            gameState[i] = '';
+
+            if (score > bestScore) {
+                bestScore = score;
+                move = i;
+            }
         }
     }
 
-    if (emptyCells.length === 0) return;
+    if (move === -1) return;
 
-    // Elige una celda al azar
-    const randomIndex = Math.floor(Math.random() * emptyCells.length);
-    const cellIndex = emptyCells[randomIndex];
-    const cellElement = document.querySelector(`.cell[data-index="${cellIndex}"]`);
+    const cellElement = document.querySelector(`.cell[data-index="${move}"]`);
 
     setTimeout(() => {
-        handleCellPlayed(cellElement, cellIndex);
+        handleCellPlayed(cellElement, move);
         handleResultValidation();
         isBotTurn = false;
     }, 500); // Pequeño retraso para simular pensamiento
