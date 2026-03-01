@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ta-Te-Ti Vibrante</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="title">Ta-Te-Ti</h1>
+
+        <!-- Pantalla de Selección de Modo -->
+        <div id="mode-selection" class="mode-selection">
+            <h2 class="subtitle">Elige el Modo de Juego</h2>
+            <div class="mode-buttons">
+                <button class="mode-btn" id="btn-pvp">Player vs. Player</button>
+                <button class="mode-btn" id="btn-pvb">Player vs. Bot</button>
+            </div>
+        </div>
+
+        <!-- Pantalla de Selección de Dificultad -->
+        <div id="difficulty-selection" class="mode-selection hidden">
+            <h2 class="subtitle">Elige la Dificultad</h2>
+            <div class="mode-buttons">
+                <button class="mode-btn" id="btn-diff-low">Bajo</button>
+                <button class="mode-btn" id="btn-diff-medium">Medio</button>
+                <button class="mode-btn" id="btn-diff-high">Difícil</button>
+            </div>
+        </div>
+
+        <!-- Pantalla de Juego -->
+        <div id="game-board-container" class="hidden">
+            <div class="status" id="status">Turno de <span class="player player-x">X</span></div>
+            <div class="board" id="board">
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+            <div class="action-buttons">
+                <button class="reset-btn" id="reset-btn">Reiniciar Juego</button>
+                <button class="change-mode-btn" id="change-mode-btn">Cambiar Modo</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
