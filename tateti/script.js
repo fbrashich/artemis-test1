@@ -10,15 +10,20 @@ const statusDisplay = document.getElementById('status');
 const resetBtn = document.getElementById('reset-btn');
 const changeModeBtn = document.getElementById('change-mode-btn');
 const modeSelection = document.getElementById('mode-selection');
+const difficultySelection = document.getElementById('difficulty-selection');
 const gameBoardContainer = document.getElementById('game-board-container');
 const btnPvp = document.getElementById('btn-pvp');
 const btnPvb = document.getElementById('btn-pvb');
+const btnDiffLow = document.getElementById('btn-diff-low');
+const btnDiffMedium = document.getElementById('btn-diff-medium');
+const btnDiffHigh = document.getElementById('btn-diff-high');
 
 // Estado del juego
 let gameActive = true;
 let currentPlayer = 'X';
 let gameState = ['', '', '', '', '', '', '', '', ''];
 let gameMode = 'pvp'; // 'pvp' o 'pvb'
+let botDifficulty = 'dificil'; // 'bajo', 'medio' o 'dificil'
 let isBotTurn = false;
 
 // Combinaciones ganadoras posibles
@@ -124,27 +129,55 @@ function checkWin(board) {
 }
 
 /**
- * Lógica del bot para realizar una jugada inteligente usando minimax.
+ * Lógica del bot para realizar una jugada según la dificultad.
  */
 function makeBotMove() {
     if (!gameActive) return;
 
-    let bestScore = -Infinity;
     let move = -1;
 
+    // Obtener casillas vacías disponibles
+    let availableMoves = [];
     for (let i = 0; i < gameState.length; i++) {
         if (gameState[i] === '') {
-            // Intentar la jugada
-            gameState[i] = 'O';
-            let score = minimax(gameState, 0, false);
-            // Deshacer la jugada
-            gameState[i] = '';
+            availableMoves.push(i);
+        }
+    }
 
-            if (score > bestScore) {
-                bestScore = score;
-                move = i;
+    if (availableMoves.length === 0) return;
+
+    let useMinimax = false;
+
+    if (botDifficulty === 'dificil') {
+        useMinimax = true;
+    } else if (botDifficulty === 'medio') {
+        // 50% probabilidad de usar minimax, 50% de hacer movimiento aleatorio
+        useMinimax = Math.random() > 0.5;
+    } else {
+        // 'bajo': siempre aleatorio
+        useMinimax = false;
+    }
+
+    if (useMinimax) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < gameState.length; i++) {
+            if (gameState[i] === '') {
+                // Intentar la jugada
+                gameState[i] = 'O';
+                let score = minimax(gameState, 0, false);
+                // Deshacer la jugada
+                gameState[i] = '';
+
+                if (score > bestScore) {
+                    bestScore = score;
+                    move = i;
+                }
             }
         }
+    } else {
+        // Movimiento aleatorio
+        const randomIndex = Math.floor(Math.random() * availableMoves.length);
+        move = availableMoves[randomIndex];
     }
 
     if (move === -1) return;
@@ -268,17 +301,30 @@ function handleRestartGame() {
  */
 function showModeSelection() {
     gameBoardContainer.classList.add('hidden');
+    difficultySelection.classList.add('hidden');
     modeSelection.classList.remove('hidden');
     handleRestartGame();
 }
 
 /**
+ * Muestra el menú de selección de dificultad.
+ */
+function showDifficultySelection() {
+    modeSelection.classList.add('hidden');
+    difficultySelection.classList.remove('hidden');
+}
+
+/**
  * Inicia el juego con el modo seleccionado.
  * @param {string} mode Modo de juego ('pvp' o 'pvb')
+ * @param {string} diff Dificultad ('bajo', 'medio', 'dificil'), opcional
  */
-function startGame(mode) {
+function startGame(mode, diff) {
     gameMode = mode;
+    if (diff) botDifficulty = diff;
+
     modeSelection.classList.add('hidden');
+    difficultySelection.classList.add('hidden');
     gameBoardContainer.classList.remove('hidden');
     handleRestartGame();
 }
@@ -288,4 +334,8 @@ cells.forEach(cell => cell.addEventListener('click', handleCellClick));
 resetBtn.addEventListener('click', handleRestartGame);
 changeModeBtn.addEventListener('click', showModeSelection);
 btnPvp.addEventListener('click', () => startGame('pvp'));
-btnPvb.addEventListener('click', () => startGame('pvb'));
+btnPvb.addEventListener('click', showDifficultySelection);
+
+btnDiffLow.addEventListener('click', () => startGame('pvb', 'bajo'));
+btnDiffMedium.addEventListener('click', () => startGame('pvb', 'medio'));
+btnDiffHigh.addEventListener('click', () => startGame('pvb', 'dificil'));
