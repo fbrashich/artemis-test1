@@ -6,7 +6,7 @@ def verify_difficulty_selection():
         page = browser.new_page()
 
         # Navigate to the local server
-        page.goto("http://localhost:8000")
+        page.goto("http://localhost:8000/tateti/index.html")
 
         # Take initial screenshot of main menu
         page.screenshot(path="verification/step1_main_menu.png")

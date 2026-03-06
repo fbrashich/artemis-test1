@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salto del Caballo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Salto del Caballo ♞</h1>
+            <p>¡Visita todas las casillas sin repetir ninguna!</p>
+        </header>
+
+        <div class="stats">
+            <div class="counter">Movimientos: <span id="moves-count">0</span>/64</div>
+            <div class="undos">Deshacer disponibles: <span id="undos-count">2</span></div>
+        </div>
+
+        <div class="controls">
+            <button id="btn-undo" disabled>Deshacer</button>
+            <button id="btn-restart">Reiniciar</button>
+        </div>
+
+        <div id="message-container" class="hidden">
+            <p id="game-message"></p>
+        </div>
+
+        <div class="board-container">
+            <div id="board" class="board"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
