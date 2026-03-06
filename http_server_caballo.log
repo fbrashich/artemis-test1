@@ -1,0 +1,7 @@
+127.0.0.1 - - [06/Mar/2026 22:07:27] "GET /artemis-test1/caballo/index.html HTTP/1.1" 200 -
+127.0.0.1 - - [06/Mar/2026 22:07:27] "GET /artemis-test1/caballo/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [06/Mar/2026 22:07:27] "GET /artemis-test1/caballo/script.js HTTP/1.1" 200 -
+127.0.0.1 - - [06/Mar/2026 22:08:13] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [06/Mar/2026 22:09:38] "GET /tateti/index.html HTTP/1.1" 200 -
+127.0.0.1 - - [06/Mar/2026 22:09:38] "GET /tateti/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [06/Mar/2026 22:09:38] "GET /tateti/script.js HTTP/1.1" 200 -
