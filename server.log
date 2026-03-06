@@ -1,0 +1,3 @@
+127.0.0.1 - - [06/Mar/2026 23:24:20] "GET /atermis-caballo/index.html HTTP/1.1" 200 -
+127.0.0.1 - - [06/Mar/2026 23:24:20] "GET /atermis-caballo/script.js HTTP/1.1" 200 -
+127.0.0.1 - - [06/Mar/2026 23:24:20] "GET /atermis-caballo/style.css HTTP/1.1" 200 -

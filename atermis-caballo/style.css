@@ -1,0 +1,234 @@
+:root {
+    --bg-color: #f0fdf4;
+    --primary-color: #10b981;
+    --primary-hover: #059669;
+    --secondary-color: #3b82f6;
+    --text-color: #1f2937;
+    --board-bg: #fff;
+    --cell-light: #d1fae5;
+    --cell-dark: #6ee7b7;
+    --cell-visited: #fcd34d;
+    --cell-possible: #93c5fd;
+    --cell-possible-hover: #60a5fa;
+    --cell-current: #34d399;
+    --border-radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.game-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    background-color: var(--bg-color);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 2px solid var(--primary-color);
+    font-weight: bold;
+}
+
+.stat-box .value {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    margin-left: 5px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    gap: 2px;
+    background-color: var(--text-color);
+    padding: 4px;
+    border-radius: 8px;
+    margin: 0 auto 25px;
+    aspect-ratio: 1/1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cell {
+    background-color: var(--cell-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: default;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.cell.dark {
+    background-color: var(--cell-dark);
+}
+
+.cell.visited {
+    background-color: var(--cell-visited);
+    opacity: 0.8;
+}
+
+.cell.visited::after {
+    content: "•";
+    color: #b45309;
+    font-size: 1.5rem;
+}
+
+.cell.current {
+    background-color: var(--cell-current);
+    transform: scale(0.95);
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+.cell.possible {
+    background-color: var(--cell-possible);
+    cursor: pointer;
+    position: relative;
+}
+
+.cell.possible::before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.cell.possible:hover {
+    background-color: var(--cell-possible-hover);
+    transform: scale(0.95);
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.btn:active {
+    transform: translateY(2px);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.message {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    animation: fadeIn 0.5s ease;
+}
+
+.message.hidden {
+    display: none;
+}
+
+.message.win {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 2px solid #22c55e;
+}
+
+.message.lose {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 2px solid #ef4444;
+}
+
+.instructions {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+.instructions h3 {
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividad para móviles */
+@media (max-width: 480px) {
+    .game-container {
+        padding: 15px;
+    }
+    .cell {
+        font-size: 1.5rem;
+    }
+    .controls {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
+    }
+}
