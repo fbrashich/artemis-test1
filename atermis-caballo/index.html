@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salto del Caballo - Atermis</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Salto del Caballo 🐴</h1>
+
+        <div class="stats">
+            <div class="stat-box">
+                <span class="label">Movimientos:</span>
+                <span id="move-count" class="value">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="label">Deshacer disp.:</span>
+                <span id="undo-count" class="value">2</span>
+            </div>
+        </div>
+
+        <div id="message-area" class="message hidden">
+            <!-- Aquí irán los mensajes de ganar o perder -->
+        </div>
+
+        <div id="board" class="board">
+            <!-- El tablero de 8x8 se generará dinámicamente -->
+        </div>
+
+        <div class="controls">
+            <button id="btn-undo" class="btn" disabled>↩️ Deshacer</button>
+            <button id="btn-restart" class="btn btn-primary">🔄 Reiniciar</button>
+        </div>
+
+        <div class="instructions">
+            <h3>¿Cómo jugar?</h3>
+            <p>Mueve el caballo en forma de "L" a través del tablero. El objetivo es visitar la mayor cantidad de casillas sin repetir ninguna. ¡Visita todas para ganar!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
