@@ -1,0 +1,213 @@
+:root {
+    /* Tema Claro (por defecto) */
+    --bg-color: #f4f4f9;
+    --text-color: #333333;
+    --board-bg: #e0e0e0;
+    --cell-light: #ffffff;
+    --cell-dark: #cccccc;
+    --cell-visited: #4a90e2;
+    --cell-current: #ffc107;
+    --cell-possible: #8bc34a;
+    --btn-bg: #6200ea;
+    --btn-text: #ffffff;
+    --btn-hover: #3700b3;
+    --message-bg: rgba(255, 255, 255, 0.9);
+}
+
+.dark-mode {
+    /* Tema Oscuro */
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --board-bg: #1e1e1e;
+    --cell-light: #424242;
+    --cell-dark: #212121;
+    --cell-visited: #1976d2;
+    --cell-current: #ffa000;
+    --cell-possible: #689f38;
+    --btn-bg: #bb86fc;
+    --btn-text: #000000;
+    --btn-hover: #9965f4;
+    --message-bg: rgba(18, 18, 18, 0.9);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    background-color: var(--board-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.stats p {
+    margin: 0.2rem 0;
+}
+
+.controls .btn {
+    margin-left: 0.5rem;
+}
+
+.btn {
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.btn:hover:not(:disabled) {
+    background-color: var(--btn-hover);
+}
+
+.btn:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#theme-toggle {
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 2px;
+    background-color: var(--text-color);
+    border: 4px solid var(--text-color);
+    margin: 0 auto 1rem;
+    width: 300px;
+    height: 300px;
+}
+
+.cell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.cell.light {
+    background-color: var(--cell-light);
+}
+
+.cell.dark {
+    background-color: var(--cell-dark);
+}
+
+.cell.visited {
+    background-color: var(--cell-visited);
+    color: white;
+}
+
+.cell.current {
+    background-color: var(--cell-current);
+    animation: pulse 1.5s infinite;
+}
+
+.cell.possible {
+    background-color: var(--cell-possible);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.cell.possible:hover {
+    transform: scale(0.95);
+    background-color: color-mix(in srgb, var(--cell-possible) 80%, black);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+/* Icono del caballo */
+.horse-icon::before {
+    content: "\f441"; /* Unicode para el icono del caballo en FontAwesome (chess-knight) */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: #000;
+}
+
+.dark-mode .horse-icon::before {
+    color: #fff;
+}
+
+/* Mensaje Final */
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--message-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    z-index: 10;
+    text-align: center;
+}
+
+.message.hidden {
+    display: none;
+}
+
+.message h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
