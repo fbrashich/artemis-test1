@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego del Salto del Caballo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <div class="container">
+        <header>
+            <h1>Salto del Caballo</h1>
+            <button id="theme-toggle" class="btn" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <main>
+            <div class="game-info">
+                <div class="stats">
+                    <p>Movimientos: <span id="moves-count">0</span></p>
+                    <p>Deshacer: <span id="undos-left">2</span>/2</p>
+                </div>
+                <div class="controls">
+                    <button id="undo-btn" class="btn" disabled>
+                        <i class="fas fa-undo"></i> Deshacer
+                    </button>
+                    <button id="reset-btn" class="btn">
+                        <i class="fas fa-redo"></i> Reiniciar
+                    </button>
+                </div>
+            </div>
+
+            <div id="game-board" class="board">
+                <!-- Las celdas se generarán por JavaScript -->
+            </div>
+
+            <div id="game-message" class="message hidden">
+                <h2 id="message-text"></h2>
+                <button id="play-again-btn" class="btn">Jugar de nuevo</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
